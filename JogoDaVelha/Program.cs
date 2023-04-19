@@ -72,20 +72,17 @@ namespace JogoDaVelha
             }
         }
 
-        static void FinalMessage(string jogadorDoTurnoAtual)
+        static void ContinuarJogando()
         {
-            Console.WriteLine("\nFim de Jogo!");
-            Console.WriteLine($"O jogador do {jogadorDoTurnoAtual} ganhou!");
-
             while (continuar != "N" || continuar != "S")
             {
                 Console.WriteLine("Deseja continuar jogando?\n S - Sim\n N- Não");
                 continuar = Console.ReadLine().ToUpper();
-                if(continuar == "N")
+                if (continuar == "N")
                 {
                     Environment.Exit(0);
                 }
-                if(continuar == "S")
+                if (continuar == "S")
                 {
                     jogadorDoTurno = "X";
                     rodadaAtual = 1;
@@ -96,7 +93,13 @@ namespace JogoDaVelha
                     break;
                 }
             }
-           
+        }
+        static void FinalMessage(string jogadorDoTurnoAtual)
+        {
+            Console.WriteLine("\nFim de Jogo!");
+            Console.WriteLine($"O jogador do {jogadorDoTurnoAtual} ganhou!");
+
+            ContinuarJogando();
         }
 
         static void HandleChangeInMatriz(string posicaoDaJogada)
@@ -167,8 +170,9 @@ namespace JogoDaVelha
 
             if(rodadaAtual == 9)
             {
-                CriarTabuleiro();
+                HandleChangeInMatriz(posicaoDaJogada);
                 Console.WriteLine("Fim de Jogo.\nO resultado foi um empate!");
+                ContinuarJogando();
             }
          }
         }
